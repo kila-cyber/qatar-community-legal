@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delete Account | حذف الحساب والبيانات - Qatar Community</title>
+  <style>
+    :root {
+      --maroon: #8A1538;
+      --navy: #1B365D;
+      --danger: #DC2626;
+      --success: #059669;
+      --bg: #F8FAFC;
+      --card: #FFFFFF;
+      --text: #0F172A;
+      --muted: #475569;
+      --border: #E2E8F0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Tahoma, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    header {
+      background: linear-gradient(135deg, var(--maroon), var(--navy));
+      color: #fff;
+      padding: 36px 20px;
+      text-align: center;
+    }
+    header h1 { margin: 0 0 8px; font-size: 1.75rem; }
+    header p { margin: 0; opacity: 0.9; font-size: 0.95rem; }
+    .container {
+      max-width: 780px;
+      margin: 28px auto 60px;
+      padding: 0 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+    }
+    h2 { margin-top: 0; color: var(--maroon); font-size: 1.25rem; }
+    label { display: block; font-weight: 700; margin: 12px 0 6px; font-size: 0.92rem; }
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #CBD5E1;
+      border-radius: 10px;
+      font-size: 1rem;
+      direction: ltr;
+    }
+    button {
+      margin-top: 16px;
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      background: var(--danger);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .status {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 10px;
+      display: none;
+      font-weight: 700;
+    }
+    .status.ok { display: block; background: #ECFDF5; color: var(--success); border: 1px solid #A7F3D0; }
+    .status.err { display: block; background: #FEF2F2; color: var(--danger); border: 1px solid #FECACA; }
+    .en { direction: ltr; text-align: left; }
+    ul { color: var(--muted); padding-inline-start: 20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Qatar Community — حذف الحساب والبيانات | Account Deletion</h1>
+    <p>Package ID: com.qatarcommunity.app</p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>حذف الحساب الفوري عبر الويب (Instant Self-Service Account Deletion)</h2>
+      <p style="color: var(--muted);">أدخل البريد الإلكتروني وكلمة المرور المسجلين في تطبيق <strong>Qatar Community</strong> لحذف حسابك نهائياً بشكل فوري، أو احذف حسابك من داخل التطبيق عبر <strong>الإعدادات &larr; حذف الحساب بالكامل</strong>.</p>
+      <form id="deleteForm">
+        <label for="email">البريد الإلكتروني / Email Address</label>
+        <input id="email" type="email" required placeholder="name@example.com" />
+
+        <label for="password">كلمة المرور الحالية / Current Password</label>
+        <input id="password" type="password" required placeholder="••••••••" />
+
+        <button id="submitBtn" type="submit">حذف الحساب نهائياً / Permanently Delete Account</button>
+        <div id="statusBox" class="status"></div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>ما هي البيانات التي يتم حذفها؟</h2>
+      <ul>
+        <li>يتم حذف حساب المصادقة (البريد الإلكتروني ومعرّف الحساب) فوراً وبشكل غير قابل للاسترجاع.</li>
+        <li>يتم مسح الملف الشخصي، إعلانات السوق، طلبات التعارف، والمفضلة المرتبطة بالحساب.</li>
+        <li>لا يتم الاحتفاظ بأي بيانات شخصية بعد إتمام الحذف.</li>
+      </ul>
+    </section>
+
+    <section class="card en" lang="en">
+      <h2>Account &amp; Data Deletion Policy (English)</h2>
+      <p style="color: var(--muted);">Users of <strong>Qatar Community</strong> (<code>com.qatarcommunity.app</code>) can permanently delete their account and associated personal data using either of the two methods below:</p>
+      <ul>
+        <li><strong>In-App:</strong> Open <em>Qatar Community</em> &rarr; go to <strong>Settings</strong> &rarr; tap <strong>Delete Account Permanently &amp; Erase All Data</strong>.</li>
+        <li><strong>On the Web:</strong> Enter your registered email and password in the form above and click <strong>Permanently Delete Account</strong> for immediate deletion.</li>
+      </ul>
+      <p style="color: var(--muted);"><strong>Data Deleted:</strong> Authentication credentials, profile details, published marketplace ads, matchmaking profile/requests, and saved items are permanently erased with zero retention period.</p>
+    </section>
+  </main>
+
+  <script>
+    const API_KEY = "AIzaSyAUrafeUSDkwuDEGHplTWBsKYM5HOpjHO8";
+    const form = document.getElementById("deleteForm");
+    const btn = document.getElementById("submitBtn");
+    const statusBox = document.getElementById("statusBox");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      if (!email || !password) return;
+
+      if (!confirm("هل أنت متأكد من حذف الحساب نهائياً؟ لا يمكن التراجع عن هذا الإجراء.\nAre you sure you want to permanently delete your account?")) {
+        return;
+      }
+
+      btn.disabled = true;
+      statusBox.className = "status";
+      statusBox.style.display = "none";
+
+      try {
+        const signInRes = await fetch(
+          `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password, returnSecureToken: true })
+          }
+        );
+        const signInData = await signInRes.json();
+        if (!signInRes.ok || !signInData.idToken) {
+          throw new Error("البريد الإلكتروني أو كلمة المرور غير صحيحة / Invalid email or password.");
+        }
+
+        const delRes = await fetch(
+          `https://identitytoolkit.googleapis.com/v1/accounts:delete?key=${API_KEY}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ idToken: signInData.idToken })
+          }
+        );
+        if (!delRes.ok) {
+          throw new Error("تعذر إتمام حذف الحساب حالياً، يرجى المحاولة مرة أخرى.");
+        }
+
+        statusBox.textContent = "تم حذف حسابك وبياناتك نهائياً بنجاح. / Your account has been permanently deleted.";
+        statusBox.className = "status ok";
+        form.reset();
+      } catch (err) {
+        statusBox.textContent = err.message || "حدث خطأ غير متوقع.";
+        statusBox.className = "status err";
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
